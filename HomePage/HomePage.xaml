@@ -1,0 +1,381 @@
+﻿<Page x:Class="CsharpMiniProjects.HomePage.HomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:local="clr-namespace:CsharpMiniProjects.Utilities"
+        Title="Mini Projects" Height="400" Width="600" Background="White">
+
+    
+    <Page.Resources>
+        <!-- Define Font Families -->
+        <FontFamily x:Key="ShrikhandFont">pack://application:,,,/Ressources/Fonts/#Shrikhand</FontFamily>
+        <FontFamily x:Key="KavoonFont">pack://application:,,,/Ressources/Fonts/#Kavoon</FontFamily>
+
+        <!-- Button Style for Hover Effect -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1.08" Duration="0:0:0.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1.08" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1" Duration="0:0:0.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- Style for ListBoxItem -->
+        <Style TargetType="ListBoxItem" x:Key="CustomListBoxItemStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="200">
+                            <ContentPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="10" CornerRadius="15" Background="#A8E5DD" Margin="10" Padding="10">
+        <Viewbox Stretch="Uniform" Margin="20" >
+            <Grid x:Name="MainGrid">
+                <!-- Main Section -->
+                <Grid x:Name="MainSection" Visibility="Visible" >
+                    <!-- Main Section Content -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Titles -->
+                    <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <local:OutlinedText Text="MINI"
+                                            FontFamily="{StaticResource ShrikhandFont}"
+                                            FontSize="72"
+                                            Stroke="Black"
+                                            StrokeThickness="2"
+                                            Fill="White"
+                                            HorizontalAlignment="Center" Height="55" Width="205" />
+                        <local:OutlinedText Text="PROJECTS"
+                                            FontFamily="{StaticResource ShrikhandFont}"
+                                            FontSize="36"
+                                            Stroke="Black"
+                                            StrokeThickness="2"
+                                            Fill="White"
+                                            HorizontalAlignment="Center"
+                                            Margin="0,20,0,0" Height="56" Width="215" />
+                    </StackPanel>
+
+                    <!-- Icons and Labels -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                            <Button Width="100" Height="100" BorderThickness="0" Click="OnToolsButtonClick">
+                                <Image Source="/Ressources/AppsMenuIcon.png" Width="100" Height="100"/>
+                            </Button>
+                            <TextBlock Text="Tools" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                            <Button Width="100" Height="100" BorderThickness="0" Click="OnGamesButtonClick">
+                                <Image Source="/Ressources/GameIcon.png" Width="100" Height="100"/>
+                            </Button>
+                            <TextBlock Text="Games" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Game Section -->
+                <Grid x:Name="GamesSection" Visibility="Collapsed" HorizontalAlignment="Right" Width="550" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="← Back" FontSize="25" FontFamily="{StaticResource KavoonFont}" 
+                            Width="121" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Click="OnGamesBackButtonClick"/>
+
+                    <!-- Titles -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <local:OutlinedText Text="Games"
+                                            FontFamily="{StaticResource ShrikhandFont}"
+                                            FontSize="60"
+                                            Stroke="Black"
+                                            StrokeThickness="1"
+                                            Fill="White"
+                                            HorizontalAlignment="Center" Height="68" Width="226" />
+                        <local:OutlinedText Text="PROJECTS"
+                                            FontFamily="{StaticResource ShrikhandFont}"
+                                            FontSize="38"
+                                            Stroke="Black"
+                                            StrokeThickness="1"
+                                            Fill="White"
+                                            Height="56" Width="214" />
+                    </StackPanel>
+
+                    <!-- Carousel with Up and Down Arrow Buttons -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <!-- Up Arrow Button -->
+                        <Button Width="40" Height="40" Click="UpButtonGames_Click"
+            HorizontalAlignment="Center" Margin="0,0,0,10" BorderThickness="0">
+                            <Image Source="pack://application:,,,/Ressources/up.png" 
+               Width="40" Height="40" Stretch="Uniform" />
+                        </Button>
+
+                        <!-- Carousel -->
+                        <ListBox x:Name="CarouselListBox" Background="#A8E5DD"
+         Width="200" 
+         Height="300" 
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+         ScrollViewer.CanContentScroll="True"
+         SelectionMode="Single"
+         BorderThickness="0"
+         VerticalContentAlignment="Center"
+         PreviewMouseWheel="CarouselListBox_MouseWheel"
+         >
+
+
+                            <!-- Items -->
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Games" Tag="SnakeGame">
+                                        <Image Source="pack://application:,,,/Ressources/snake-game-screenshot.png" 
+                   Width="180" Height="180" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="Snake Game" 
+                                FontSize="26" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Games" Tag="Game2">
+                                        <Image Source="/Ressources/Game2.png" Width="180" Height="180" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="Game2" 
+                                FontSize="26" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Games" Tag="Game3">
+                                        <Image Source="/Ressources/Game3.png" Width="180" Height="180"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="Game 3" 
+                                FontSize="26" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Games" Tag="Game4">
+                                        <Image Source="/Ressources/Game4.png" Width="180" Height="180"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="Game 4" 
+                                FontSize="26" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+
+                        </ListBox>
+
+
+                        <!-- Down Arrow Button -->
+                        <Button Width="40" Height="40" Click="DownButtonGames_Click"
+            HorizontalAlignment="Center" Margin="10,0,0,0" BorderThickness="0">
+                            <Image Source="pack://application:,,,/Ressources/down.png" 
+               Width="40" Height="40" Stretch="Uniform" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+
+
+                <!-- Tool Section -->
+                <Grid x:Name="ToolsSection" Visibility="Collapsed" HorizontalAlignment="Left" Width="550">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Return Button -->
+                    <Button Content="Back →" FontSize="25" FontFamily="{StaticResource KavoonFont}" 
+Width="121" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top"
+Click="OnToolsBackButtonClick" Grid.Column="1" Margin="0,0,10,0"/>
+
+                    <!-- Titles -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <local:OutlinedText Text="Tools"
+                            FontFamily="{StaticResource ShrikhandFont}"
+                            FontSize="60"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Fill="White"
+                            HorizontalAlignment="Center" Height="68" Width="226" />
+                        <local:OutlinedText Text="PROJECTS"
+                            FontFamily="{StaticResource ShrikhandFont}"
+                            FontSize="38"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Fill="White"
+                            Height="56" Width="214" />
+                    </StackPanel>
+
+                    <!-- Carousel with Up and Down Arrow Buttons -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <!-- Up Arrow Button -->
+                        <Button Width="40" Height="40" Click="UpButtonTools_Click"
+                HorizontalAlignment="Center" Margin="0,0,0,10" BorderThickness="0">
+                            <Image Source="pack://application:,,,/Ressources/up.png" 
+                   Width="40" Height="40" Stretch="Uniform" />
+                        </Button>
+
+                        <!-- Carousel -->
+                        <ListBox x:Name="ToolCarouselListBox" Background="#A8E5DD"
+                 Width="200" 
+                 Height="300" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 ScrollViewer.CanContentScroll="True"
+                 SelectionMode="Single"
+                 BorderThickness="0"
+                 VerticalContentAlignment="Center"
+                 PreviewMouseWheel="CarouselListBox_MouseWheel">
+
+                            <!-- Items -->
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Tools" Tag="WorkHoursManagement">
+                                        <Image Source="pack://application:,,,/Ressources/tool1.png" 
+                   Width="180" Height="180" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="WorkHours Management" 
+                                FontSize="15" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+                            <ListBoxItem Style="{StaticResource CustomListBoxItemStyle}">
+                                <StackPanel>
+                                    <Border Width="200" Height="200" CornerRadius="20" Background="White" ClipToBounds="True"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown_Tools" Tag="Tool2">
+                                        <Image Source="pack://application:,,,/Ressources/tool2.png" 
+                   Width="180" Height="180" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" Width="200" Height="50">
+                                        <local:OutlinedText Text="Tool 2" 
+                                FontSize="26" 
+                                FontFamily="{StaticResource KavoonFont}" 
+                                Stroke="Black"
+                                StrokeThickness="0.5"
+                                Fill="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </ListBoxItem>
+
+                            <!-- Add more items as needed -->
+
+                        </ListBox>
+
+                        <!-- Down Arrow Button -->
+                        <Button Width="40" Height="40" Click="DownButtonTools_Click"
+                HorizontalAlignment="Center" Margin="10,0,0,0" BorderThickness="0">
+                            <Image Source="pack://application:,,,/Ressources/down.png" 
+                   Width="40" Height="40" Stretch="Uniform" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+
+            </Grid>
+        </Viewbox>
+
+    </Border>
+</Page>

@@ -1,0 +1,62 @@
+﻿<Window x:Class="CsharpMiniProjects.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:local="clr-namespace:CsharpMiniProjects.Utilities"
+        Title="Mini Projects" Height="400" Width="600" Background="White">
+
+    <Window.Resources>
+        <!-- Define Font Families -->
+        <FontFamily x:Key="ShrikhandFont">pack://application:,,,/Ressources/Fonts/#Shrikhand</FontFamily>
+        <FontFamily x:Key="KavoonFont">pack://application:,,,/Ressources/Fonts/#Kavoon</FontFamily>
+
+        <!-- Button Style for Hover Effect -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1.08" Duration="0:0:0.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1.08" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1" Duration="0:0:0.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Viewbox>
+    <Frame Name="mainFrame" NavigationUIVisibility="Hidden"/>
+    </Viewbox>
+</Window>

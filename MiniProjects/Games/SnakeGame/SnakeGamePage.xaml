@@ -1,0 +1,53 @@
+﻿<Page x:Class="CsharpMiniProjects.Games.SnakeGame.SnakeGamePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CsharpMiniProjects.Games.SnakeGame"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" Focusable="True"
+      >
+    <Page.Resources>
+        <!-- Define Font Families -->
+        <FontFamily x:Key="KavoonFont">pack://application:,,,/Ressources/Fonts/#Kavoon</FontFamily>
+    </Page.Resources>
+    <Grid Background="Black">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="137*"/>
+        </Grid.RowDefinitions>
+        <!-- Return Button -->
+        <Button Content="← Back" FontSize="15" FontFamily="{StaticResource KavoonFont}" 
+         Width="121" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"
+         Click="ReturnButton_Click" Background="Black" Foreground="White" BorderBrush="{x:Null}"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Black" HorizontalAlignment="Center">
+            <TextBlock Text="Score: " Margin="10" Foreground="White" FontSize="24"/>
+            <TextBlock x:Name="ScoreText" Text="0" Margin="0,10,10,10" Foreground="White" FontSize="24"/>
+        </StackPanel>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform" Margin="10">
+            <Grid Background="Transparent">
+
+                <Border BorderBrush="Transparent" BorderThickness="2">
+                    <UniformGrid x:Name="GameGridBg" Width="400" Height="400" />
+                </Border>
+
+                <Border BorderBrush="Transparent" BorderThickness="2">
+                    <UniformGrid x:Name="GameGrid" Width="400" Height="400" Background="Transparent"/>
+                </Border>
+
+                <Border x:Name="GameOverOverlay" Background="#80000000" Visibility="Collapsed">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="Game Over" FontSize="24" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                        <Button x:Name="ResetButton" Content="Reset" FontSize="20" Padding="20,10" Click="ResetButton_Click"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+        </Viewbox>
+
+    </Grid>
+</Page>
