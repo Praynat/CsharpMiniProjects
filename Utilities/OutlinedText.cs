@@ -30,6 +30,12 @@ namespace CsharpMiniProjects.Utilities
         public static readonly DependencyProperty StrokeProperty =
             DependencyProperty.Register("Stroke", typeof(Brush), typeof(OutlinedText),
                 new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty TextAlignmentProperty =
+    DependencyProperty.Register(
+        nameof(TextAlignment),
+        typeof(TextAlignment),
+        typeof(OutlinedText),
+        new FrameworkPropertyMetadata(TextAlignment.Left, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public string Text
         {
@@ -67,27 +73,66 @@ namespace CsharpMiniProjects.Utilities
             set => SetValue(StrokeProperty, value);
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
+        public TextAlignment TextAlignment
         {
-            base.OnRender(drawingContext);
+            get => (TextAlignment)GetValue(TextAlignmentProperty);
+            set => SetValue(TextAlignmentProperty, value);
+        }
 
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            // Create formatted text based on the current properties
             var formattedText = new FormattedText(
-                Text,
+                Text ?? string.Empty,
                 System.Globalization.CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 new Typeface(FontFamily, FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
                 FontSize,
                 Fill,
-                VisualTreeHelper.GetDpi(this).PixelsPerDip);
+                VisualTreeHelper.GetDpi(this).PixelsPerDip)
+            {
+                MaxTextWidth = availableSize.Width,
+                TextAlignment = this.TextAlignment
+            };
 
-            // Calculate centered position
-            double x = (ActualWidth - formattedText.Width) / 2;
-            double y = (ActualHeight - formattedText.Height) / 2;
+            // Return the desired size based on the formatted text
+            return new Size(formattedText.Width, formattedText.Height);
+        }
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            // Accept the final size given by the layout system
+            return finalSize;
+        }
 
-            var geometry = formattedText.BuildGeometry(new Point(x, y));
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+
+            var formattedText = new FormattedText(
+                Text ?? string.Empty,
+                System.Globalization.CultureInfo.InvariantCulture,
+                FlowDirection.LeftToRight,
+                new Typeface(FontFamily, FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                FontSize,
+                Fill,
+                VisualTreeHelper.GetDpi(this).PixelsPerDip)
+            {
+                MaxTextWidth = RenderSize.Width,
+                TextAlignment = this.TextAlignment
+            };
+
+            // Calculate the vertical center position
+            double y = (RenderSize.Height - formattedText.Height) / 2;
+
+            // Build geometry starting at (0, y)
+            var geometry = formattedText.BuildGeometry(new Point(0, y));
+
             var pen = new Pen(Stroke, StrokeThickness);
 
             drawingContext.DrawGeometry(Fill, pen, geometry);
         }
+
+
     }
 }

@@ -1,19 +1,22 @@
 ﻿    
 using CsharpMiniProjects.Games.SnakeGame;
 using CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages;
+using CsharpMiniProjects.UserControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 
 namespace CsharpMiniProjects.HomePage
 {
-  
+
     public partial class HomePage : Page
     {
         public HomePage()
         {
             InitializeComponent();
+            DataContext = new HomePageViewModel();
         }
         private void OnToolsButtonClick(object sender, RoutedEventArgs e)
         {
@@ -45,25 +48,32 @@ namespace CsharpMiniProjects.HomePage
 
         private static void ScrollListBox(ListBox listBox, bool scrollUp)
         {
-            if (scrollUp && listBox.SelectedIndex > 0)
+            // Access the ScrollViewer within the ListBox
+            var scrollViewer = FindVisualChild<ScrollViewer>(listBox);
+
+            if (scrollViewer != null)
             {
-                listBox.SelectedIndex -= 1;
+                // Scroll up or down by a small offset
+                if (scrollUp)
+                {
+                    scrollViewer.LineUp();
+                }
+                else
+                {
+                    scrollViewer.LineDown();
+                }
             }
-            else if (!scrollUp && listBox.SelectedIndex < listBox.Items.Count - 1)
-            {
-                listBox.SelectedIndex += 1;
-            }
-            listBox.ScrollIntoView(listBox.SelectedItem);
         }
+
 
         private void UpButtonGames_Click(object sender, RoutedEventArgs e)
         {
-            ScrollListBox(CarouselListBox, true);
+            ScrollListBox(GameCarouselListBox, true);
         }
 
         private void DownButtonGames_Click(object sender, RoutedEventArgs e)
         {
-            ScrollListBox(CarouselListBox, false);
+            ScrollListBox(GameCarouselListBox, false);
         }
 
         private void UpButtonTools_Click(object sender, RoutedEventArgs e)
@@ -76,83 +86,138 @@ namespace CsharpMiniProjects.HomePage
             ScrollListBox(ToolCarouselListBox, false);
         }
 
+
         private void CarouselListBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             ListBox listBox = (ListBox)sender;
-            if (e.Delta > 0)
-            {
-                if (listBox.SelectedIndex > 0)
-                {
-                    listBox.SelectedIndex -= 1;
-                }
-            }
-            else if (e.Delta < 0)
-            {
-                if (listBox.SelectedIndex < listBox.Items.Count - 1)
-                {
-                    listBox.SelectedIndex += 1;
-                }
-            }
+            var scrollViewer = FindVisualChild<ScrollViewer>(listBox);
 
-            e.Handled = true;
+            if (scrollViewer != null)
+            {
+                if (e.Delta > 0) // Scroll up
+                {
+                    scrollViewer.LineUp();
+                }
+                else if (e.Delta < 0) // Scroll down
+                {
+                    scrollViewer.LineDown();
+                }
 
-            listBox.ScrollIntoView(listBox.SelectedItem);
+                e.Handled = true; // Mark the event as handled to prevent further propagation
+            }
         }
 
-        // Event handler when clicking on image
-        private void Image_MouseLeftButtonDown_Games(object sender, MouseButtonEventArgs e)
+        // Helper function to find the ScrollViewer inside the ListBox
+        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
-            Border? clickedBorder = sender as Border;
-            if (clickedBorder != null)
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
-                string? gameTag = clickedBorder.Tag as string; 
-                if (gameTag != null)
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T)
                 {
-                    switch (gameTag)
-                    {
-                        case "SnakeGame":
-                            this.NavigationService.Navigate(new SnakeGamePage());
-                            break;
-                        case "Game2":
-                            this.NavigationService.Navigate(new HomePage());
-                            break;
-                        case "Game3":
-                            this.NavigationService.Navigate(new HomePage());
-                            break;
-                        case "Game4":
-                            this.NavigationService.Navigate(new HomePage());
-                            break;
-                        default:
-                            MessageBox.Show("No page found for this game.");
-                            break;
-                    }
+                    return (T)child;
                 }
+
+                var childOfChild = FindVisualChild<T>(child);
+                if (childOfChild != null)
+                {
+                    return childOfChild;
+                }
+            }
+            return null;
+        }
+
+        private void ListBoxItemControl_ItemClicked(object sender, EventArgs e)
+        {
+            // Get the data context of the clicked item
+            var control = sender as ListBoxItemControl;
+            var data = control?.DataContext as ListBoxItemData;
+
+            if (data != null)
+            {
+                // Determine which page to navigate to based on data.Title or other properties
+                NavigateToPage(data);
             }
         }
 
-        // Event handler for tool images
-        private void Image_MouseLeftButtonDown_Tools(object sender, MouseButtonEventArgs e)
+        private void NavigateToPage(ListBoxItemData itemData)
         {
-            Border? clickedBorder = sender as Border;
-            if (clickedBorder != null)
+            if (itemData == null)
             {
-                string? toolTag = clickedBorder.Tag as string;
-                if (toolTag != null)
-                {
-                    switch (toolTag)
-                    {
-                        case "WorkHoursManagement":
-                            this.NavigationService.Navigate(new WorkHoursHomePage());
-                            break;
-                        case "Tool2":
-                            this.NavigationService.Navigate(new HomePage());
-                            break;
-                        default:
-                            MessageBox.Show("No page found for this tool.");
-                            break;
-                    }
-                }
+                MessageBox.Show("Item data is null.");
+                return;
+            }
+
+            switch (itemData.Identifier)
+            {
+                case "SnakeGame":
+                    NavigationService.Navigate(new SnakeGamePage());
+                    break;
+                case "Tetris":
+                    NavigationService.Navigate(new SnakeGamePage());
+                    break;
+                case "WorkHoursManagement":
+                    NavigationService.Navigate(new WorkHoursHomePage());
+                    break;
+                case "ExpenseTracker":
+                    NavigationService.Navigate(new WorkHoursHomePage());
+                    break;
+                default:
+                    MessageBox.Show("No page associated with this item.");
+                    break;
             }
         }
+
+        private void ListBoxItemControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Get the control that was just loaded
+            var control = sender as ListBoxItemControl;
+
+            // Subscribe to the custom events for mouse enter and leave
+            if (control != null)
+            {
+                control.ItemMouseEnter += ListBoxItemControl_ItemMouseEnter;
+                control.ItemMouseLeave += ListBoxItemControl_ItemMouseLeave;
+            }
+        }
+
+        // Event handler for mouse enter to show the popup
+        private void ListBoxItemControl_ItemMouseEnter(object sender, ListBoxItemControl.ItemEventArgs e)
+        {
+            var itemData = e.ItemData;
+            if (itemData != null)
+            {
+                // Set the Popup content
+                popupTitleTextBlock.Text = itemData.PopupTitle;
+                popupDescriptionTextBlock.Inlines.Clear();
+                foreach (var inline in itemData.PopupDescriptionInlines)
+                {
+                    popupDescriptionTextBlock.Inlines.Add(inline);
+                }
+
+                if (GamesSection.Visibility == Visibility.Visible)
+                {
+                    popupInfo.PlacementTarget = TitlesInGamesSection;
+                    popupInfo.Placement = System.Windows.Controls.Primitives.PlacementMode.Left;
+                    popupInfo.HorizontalOffset = -240;
+                }
+                else if (ToolsSection.Visibility == Visibility.Visible)
+                {
+                    popupInfo.PlacementTarget = TitlesInToolsSection;
+                    popupInfo.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
+                    popupInfo.HorizontalOffset = 250;
+                }
+                popupInfo.IsOpen = true;
+            }
+        }
+
+        // Event handler for mouse leave to hide the popup
+        private void ListBoxItemControl_ItemMouseLeave(object sender, ListBoxItemControl.ItemEventArgs e)
+        {
+            popupInfo.IsOpen = false;
+        }
+
+
     }
+
 }

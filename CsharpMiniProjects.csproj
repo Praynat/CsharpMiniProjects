@@ -17,12 +17,33 @@
     <None Remove="Ressources\Fonts\Kavoon-Regular.ttf" />
     <None Remove="Ressources\Fonts\Shrikhand-Regular.ttf" />
     <None Remove="Ressources\GameIcon.png" />
+    <None Remove="Ressources\Images\CsharpIcon.png" />
+    <None Remove="Ressources\Images\SnakeGameIcon.png" />
+    <None Remove="Ressources\Images\WorkHoursManagementIcon.png" />
+    <None Remove="Ressources\Images\WorkHoursManagementPicture.png" />
+    <None Remove="Ressources\Images\WorkHoursManagementRoundIcon.png" />
+    <None Remove="Ressources\Images\XamlIcon.png" />
     <None Remove="Ressources\snake-game-screenshot.png" />
     <None Remove="Ressources\up.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="MiniProjects\Tools\WorkHoursManagementApp\Ressources\time-management.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ressources\Images\CsharpIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\SnakeGameIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\WorkHoursManagementIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\WorkHoursManagementPicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +60,12 @@
     <Resource Include="Ressources\Fonts\Kavoon-Regular.ttf" />
     <Resource Include="Ressources\Fonts\Shrikhand-Regular.ttf" />
     <Resource Include="Ressources\GameIcon.png" />
+    <Resource Include="Ressources\Images\WorkHoursManagementRoundIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\XamlIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\snake-game-screenshot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
