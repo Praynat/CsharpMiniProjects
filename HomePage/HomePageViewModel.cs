@@ -17,7 +17,7 @@ public class HomePageViewModel
         new ListBoxItemData
         {
             Title = "Snake Game",
-            ImageSource = "pack://application:,,,/Ressources/snake-game-screenshot.png",
+            ImageSource = "pack://application:,,,/Ressources/SnakeGamePicture.png",
             IconSource = "pack://application:,,,/Ressources/Images/SnakeGameIcon.png",
             PopupTitle = "Snake Game Instructions",
             PopupDescriptionInlines = new Inline[]
@@ -81,6 +81,21 @@ public class HomePageViewModel
         },
         new ListBoxItemData
         {
+            Title = "Explicit Words Monitor",
+            ImageSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerPicture.png",
+            IconSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerIcon.png",
+            PopupTitle = "Track Your Expenses",
+            PopupDescriptionInlines = new Inline[]
+            {
+                new Run("Monitor your daily, weekly, and monthly expenses."),
+                new LineBreak(),
+                new Bold(new Run("Set budgets")),
+                new Run(" and get detailed reports.")
+            },
+            Identifier = "ExplicitWordMonitor"
+        },
+        new ListBoxItemData
+        {
             Title = "Expense Tracker",
             ImageSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerPicture.png",
             IconSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerIcon.png",
@@ -92,7 +107,7 @@ public class HomePageViewModel
                 new Bold(new Run("Set budgets")),
                 new Run(" and get detailed reports.")
             },
-            Identifier = "ExpenseTracker" 
+            Identifier = "ExpenseTracker"
         }
     };
     }

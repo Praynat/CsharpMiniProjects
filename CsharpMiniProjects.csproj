@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="HomePage\snake-game-screenshot.png" />
     <None Remove="MiniProjects\Games\SnakeGame\myApple.png" />
+    <None Remove="MiniProjects\Tools\ExplicitWordMonitor\Resources\DefaultWords.txt" />
     <None Remove="MiniProjects\Tools\WorkHoursManagementApp\Ressources\time-management.ico" />
     <None Remove="Ressources\AppsMenuIcon.png" />
     <None Remove="Ressources\down.png" />
@@ -32,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="MiniProjects\Tools\ExplicitWordMonitor\Resources\DefaultWords.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Ressources\Images\CsharpIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -48,6 +52,8 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+    <PackageReference Include="Titanium.Web.Proxy" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>

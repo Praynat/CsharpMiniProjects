@@ -159,8 +159,8 @@ namespace CsharpMiniProjects.HomePage
                 case "WorkHoursManagement":
                     NavigationService.Navigate(new WorkHoursHomePage());
                     break;
-                case "ExpenseTracker":
-                    NavigationService.Navigate(new WorkHoursHomePage());
+                case "ExplicitWordMonitor":
+                    NavigationService.Navigate(new ExplicitWordMonitor.HomePage.WordFilterHomePage());
                     break;
                 default:
                     MessageBox.Show("No page associated with this item.");
