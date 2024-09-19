@@ -22,7 +22,7 @@
             <Grid Margin="0,7,0,0">
                 <!-- Use OutlinedText for the title -->
                 <utils:OutlinedText Text="{Binding Title}"
-                            FontSize="30"
+                            FontSize="{Binding TitleFontSize}"
                             FontFamily="{StaticResource KavoonFont}"
                             Stroke="Black"
                             StrokeThickness="0.5"

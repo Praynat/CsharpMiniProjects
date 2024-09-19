@@ -17,9 +17,9 @@ public class HomePageViewModel
         new ListBoxItemData
         {
             Title = "Snake Game",
-            ImageSource = "pack://application:,,,/Ressources/SnakeGamePicture.png",
+            ImageSource = "pack://application:,,,/Ressources/Images/SnakeGamePicture.png",
             IconSource = "pack://application:,,,/Ressources/Images/SnakeGameIcon.png",
-            PopupTitle = "Snake Game Instructions",
+            PopupTitle = "Snake Game",
             PopupDescriptionInlines = new Inline[]
             {
                 new Run("Control the snake using the arrow keys."),
@@ -34,8 +34,8 @@ public class HomePageViewModel
         new ListBoxItemData
         {
             Title = "Tetris",
-            ImageSource = "pack://application:,,,/Ressources/tetris-screenshot.png",
-            IconSource = "pack://application:,,,/Ressources/Images/TetrisIcon.png",
+           ImageSource = "pack://application:,,,/Ressources/Images/SnakeGamePicture.png",
+            IconSource = "pack://application:,,,/Ressources/Images/SnakeGameIcon.png",
             PopupTitle = "Tetris Instructions",
             PopupDescriptionInlines = new Inline[]
             {
@@ -82,9 +82,9 @@ public class HomePageViewModel
         new ListBoxItemData
         {
             Title = "Explicit Words Monitor",
-            ImageSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerPicture.png",
-            IconSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerIcon.png",
-            PopupTitle = "Track Your Expenses",
+            ImageSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterPicture.jpg",
+            IconSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterIcon.png",
+            PopupTitle = "Filter Explicit Words",
             PopupDescriptionInlines = new Inline[]
             {
                 new Run("Monitor your daily, weekly, and monthly expenses."),
@@ -92,13 +92,14 @@ public class HomePageViewModel
                 new Bold(new Run("Set budgets")),
                 new Run(" and get detailed reports.")
             },
-            Identifier = "ExplicitWordMonitor"
+            Identifier = "ExplicitWordMonitor",
+            TitleFontSize = 25
         },
         new ListBoxItemData
         {
             Title = "Expense Tracker",
-            ImageSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerPicture.png",
-            IconSource = "pack://application:,,,/Ressources/Images/ExpenseTrackerIcon.png",
+              ImageSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterPicture.jpg",
+            IconSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterIcon.png",
             PopupTitle = "Track Your Expenses",
             PopupDescriptionInlines = new Inline[]
             {

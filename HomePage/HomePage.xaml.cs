@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace CsharpMiniProjects.HomePage
@@ -160,7 +161,8 @@ namespace CsharpMiniProjects.HomePage
                     NavigationService.Navigate(new WorkHoursHomePage());
                     break;
                 case "ExplicitWordMonitor":
-                    NavigationService.Navigate(new ExplicitWordMonitor.HomePage.WordFilterHomePage());
+                    var mainWindow = new ExplicitWordMonitor.MainWindow();
+                    mainWindow.Show();
                     break;
                 default:
                     MessageBox.Show("No page associated with this item.");
@@ -194,6 +196,8 @@ namespace CsharpMiniProjects.HomePage
                 {
                     popupDescriptionTextBlock.Inlines.Add(inline);
                 }
+
+                popupIconImage.Source = new BitmapImage(new Uri(itemData.IconSource, UriKind.RelativeOrAbsolute));
 
                 if (GamesSection.Visibility == Visibility.Visible)
                 {

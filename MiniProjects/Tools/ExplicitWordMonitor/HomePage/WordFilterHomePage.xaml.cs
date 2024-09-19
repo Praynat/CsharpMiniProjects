@@ -298,5 +298,73 @@ namespace ExplicitWordMonitor.HomePage
             this.NavigationService.Navigate(new CsharpMiniProjects.HomePage.HomePage());
 
         }
+        private void DeleteWord_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the word to delete from the CommandParameter of the button
+            string wordToDelete = (sender as System.Windows.Controls.Button)?.CommandParameter as string;
+
+            if (string.IsNullOrEmpty(wordToDelete))
+                return;
+
+            // Ask for the password before deleting the word
+            if (AskForPassword())
+            {
+                // Remove the word from the user-added words list
+                if (UserAddedWords.Contains(wordToDelete))
+                {
+                    UserAddedWords.Remove(wordToDelete);
+                    System.Windows.MessageBox.Show("Word deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateComboBox(); // Refresh the ComboBox after deletion
+                    SaveUserAddedWords(); // Save updated list
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Incorrect password. Word not deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool AskForPassword()
+        {
+            // Create a simple password window to ask the user for the password
+            Window passwordWindow = new Window
+            {
+                Title = "Enter Password",
+                Width = 300,
+                Height = 150,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+            };
+
+            StackPanel panel = new StackPanel { Margin = new Thickness(10) };
+            PasswordBox passwordBox = new PasswordBox { Width = 200 };
+            System.Windows.Controls.Button submitButton = new System.Windows.Controls.Button { Content = "Submit", Width = 100, Margin = new Thickness(0, 10, 0, 0) };
+
+            panel.Children.Add(new System.Windows.Controls.Label { Content = "Please enter the password to delete the word:" });
+            panel.Children.Add(passwordBox);
+            panel.Children.Add(submitButton);
+
+            passwordWindow.Content = panel;
+            bool isPasswordCorrect = false;
+
+            submitButton.Click += (sender, e) =>
+            {
+                if (passwordBox.Password == _password)
+                {
+                    isPasswordCorrect = true;
+                    passwordWindow.Close();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Incorrect password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    passwordBox.Clear();
+                }
+            };
+
+            passwordWindow.ShowDialog();
+
+            return isPasswordCorrect;
+        }
+
     }
 }

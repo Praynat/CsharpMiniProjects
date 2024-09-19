@@ -8,4 +8,5 @@ public class ListBoxItemData
     public string PopupTitle { get; set; }
     public Inline[] PopupDescriptionInlines { get; set; }
     public string Identifier { get; set; }
+    public double TitleFontSize { get; set; } = 30;
 }

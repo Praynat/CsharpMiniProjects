@@ -19,7 +19,10 @@
     <None Remove="Ressources\Fonts\Shrikhand-Regular.ttf" />
     <None Remove="Ressources\GameIcon.png" />
     <None Remove="Ressources\Images\CsharpIcon.png" />
+    <None Remove="Ressources\Images\ExplicitWordFilterIcon.png" />
+    <None Remove="Ressources\Images\ExplicitWordFilterPicture.jpg" />
     <None Remove="Ressources\Images\SnakeGameIcon.png" />
+    <None Remove="Ressources\Images\SnakeGamePicture.png" />
     <None Remove="Ressources\Images\WorkHoursManagementIcon.png" />
     <None Remove="Ressources\Images\WorkHoursManagementPicture.png" />
     <None Remove="Ressources\Images\WorkHoursManagementRoundIcon.png" />
@@ -39,7 +42,16 @@
     <Resource Include="Ressources\Images\CsharpIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Ressources\Images\ExplicitWordFilterIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\ExplicitWordFilterPicture.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Images\SnakeGameIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\SnakeGamePicture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Images\WorkHoursManagementIcon.png">

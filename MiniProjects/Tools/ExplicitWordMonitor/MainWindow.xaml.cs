@@ -28,6 +28,13 @@ namespace ExplicitWordMonitor
 
             // Subscribe to the event to update bad words list
             _homePage.BadWordsListUpdated += UpdateBadWordsList;
+
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+        }
+        private void OnProcessExit(object sender, EventArgs e)
+        {
+            // Stop the proxy server to unblock the internet
+            webFilterProxy?.Stop();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
