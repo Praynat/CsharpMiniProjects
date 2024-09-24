@@ -97,18 +97,16 @@ public class HomePageViewModel
         },
         new ListBoxItemData
         {
-            Title = "Expense Tracker",
+            Title = "To Do List",
               ImageSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterPicture.jpg",
             IconSource = "pack://application:,,,/Ressources/Images/ExplicitWordFilterIcon.png",
             PopupTitle = "Track Your Expenses",
             PopupDescriptionInlines = new Inline[]
             {
-                new Run("Monitor your daily, weekly, and monthly expenses."),
-                new LineBreak(),
-                new Bold(new Run("Set budgets")),
-                new Run(" and get detailed reports.")
+                new Run("Manage your"),
+                new Bold(new Run("Tasks")),
             },
-            Identifier = "ExpenseTracker"
+            Identifier = "ToDoList"
         }
     };
     }

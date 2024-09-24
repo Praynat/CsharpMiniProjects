@@ -160,6 +160,9 @@ namespace CsharpMiniProjects.HomePage
                 case "WorkHoursManagement":
                     NavigationService.Navigate(new WorkHoursHomePage());
                     break;
+                case "ToDoList":
+                    NavigationService.Navigate(new CsharpMiniProjects.MiniProjects.Tools.ToDoList.ToDoListHomePage());
+                    break;
                 case "ExplicitWordMonitor":
                     var mainWindow = new ExplicitWordMonitor.MainWindow();
                     mainWindow.Show();
