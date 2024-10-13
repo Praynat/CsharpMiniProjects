@@ -8,7 +8,14 @@
     <Viewbox Stretch="Fill">
 
         <Canvas x:Name="GameCanvas" Width="815" Height="450" Background="#2F3847" Focusable="True">
-
+            <TextBlock Text="Tip!  Press on spacebar (or left shift for second player) when touching the ball to make it go faster"
+   Foreground="White"
+              TextAlignment="Center"         
+   FontSize="12"
+   FontWeight="ExtraLight"
+   HorizontalAlignment="Center"
+   VerticalAlignment="Center"
+   TextWrapping="Wrap" Canvas.Left="233" Canvas.Top="21" Height="39" Width="342" />
             <!-- Top wall -->
             <Rectangle x:Name="TopWall"
                Width="815" Height="10"

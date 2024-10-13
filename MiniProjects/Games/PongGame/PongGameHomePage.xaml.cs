@@ -194,7 +194,8 @@ namespace CsharpMiniProjects.MiniProjects.Games.PongGame
         }
     private void ReturnButton_Click(object sender, RoutedEventArgs e)
     {
-        if (this.NavigationService.CanGoBack)
+            game.PauseGame();
+            if (this.NavigationService.CanGoBack)
         {
             this.NavigationService.GoBack();
         }
