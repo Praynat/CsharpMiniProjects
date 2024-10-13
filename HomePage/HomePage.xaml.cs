@@ -1,6 +1,7 @@
 ﻿    
 using CsharpMiniProjects.Games.SnakeGame;
 using CsharpMiniProjects.MiniProjects.Games.PongGame;
+using CsharpMiniProjects.MiniProjects.Games.TicTacToeGame;
 using CsharpMiniProjects.MiniProjects.Tools.Countries;
 using CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages;
 using CsharpMiniProjects.UserControls;
@@ -178,6 +179,9 @@ namespace CsharpMiniProjects.HomePage
                     break;
                 case "PongGame":
                     NavigationService.Navigate(new PongGameHomePage());
+                    break;
+                case "TicTacToeGame":
+                    NavigationService.Navigate(new TicTacToeHomePage());
                     break;
                 case "WorkHoursManagement":
                     NavigationService.Navigate(new WorkHoursHomePage());

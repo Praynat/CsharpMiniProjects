@@ -158,13 +158,13 @@
                     <!-- Icons and Labels -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-80,0,0">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnToolsButtonClick" >
+                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnToolsButtonClick" Style="{StaticResource MainMenuButtons}">
                                 <Image Source="/Ressources/AppsMenuIcon.png" Width="90" Height="100"/>
                             </Button>
                             <TextBlock Text="Tools" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnGamesButtonClick">
+                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnGamesButtonClick" Style="{StaticResource MainMenuButtons}">
                                 <Image Source="/Ressources/GameIcon.png" Width="90" Height="100"/>
                             </Button>
                             <TextBlock Text="Games" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
@@ -191,7 +191,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Content="← Back" FontSize="25" FontFamily="{StaticResource KavoonFont}" 
-                            Width="121" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Width="121" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MainMenuButtons}"
                             Click="OnGamesBackButtonClick"/>
 
                     <!-- Titles In Games Section -->
@@ -216,7 +216,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <!-- Up Arrow Button -->
                         <Button Width="40" Height="40" Click="UpButtonGames_Click"
-HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
+HorizontalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource MainMenuButtons}" BorderThickness="0">
                             <Image Source="pack://application:,,,/Ressources/up.png" 
    Width="40" Height="40" Stretch="Uniform" />
                         </Button>
@@ -245,7 +245,7 @@ HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
 
                         <!-- Down Arrow Button -->
                         <Button Width="40" Height="40" Click="DownButtonGames_Click"
-HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
+HorizontalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource MainMenuButtons}" BorderThickness="0">
                             <Image Source="pack://application:,,,/Ressources/down.png" 
    Width="40" Height="40" Stretch="Uniform" />
                         </Button>
@@ -273,7 +273,7 @@ HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
                     </Grid.ColumnDefinitions>
 
                     <!-- Return Button -->
-                    <Button Content="Back →" FontSize="25" FontFamily="{StaticResource KavoonFont}" 
+                    <Button Content="Back →" FontSize="25" FontFamily="{StaticResource KavoonFont}" Style="{StaticResource MainMenuButtons}" 
 Width="121" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top"
 Click="OnToolsBackButtonClick" Grid.Column="1" Margin="0,0,0,0"/>
 
@@ -299,7 +299,7 @@ Click="OnToolsBackButtonClick" Grid.Column="1" Margin="0,0,0,0"/>
                     <!-- Carousel with Up and Down Arrow Buttons -->
                     <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <!-- Up Arrow Button -->
-                        <Button Width="40" Height="40" Click="UpButtonTools_Click"
+                        <Button Width="40" Height="40" Click="UpButtonTools_Click" Style="{StaticResource MainMenuButtons}"
                 HorizontalAlignment="Center" Margin="0,0,0,10" BorderThickness="0">
                             <Image Source="pack://application:,,,/Ressources/up.png" 
                    Width="40" Height="40" Stretch="Uniform" />
@@ -328,7 +328,7 @@ Click="OnToolsBackButtonClick" Grid.Column="1" Margin="0,0,0,0"/>
                         </ListBox>
 
                         <!-- Down Arrow Button -->
-                        <Button Width="40" Height="40" Click="DownButtonTools_Click"
+                        <Button Width="40" Height="40" Click="DownButtonTools_Click" Style="{StaticResource MainMenuButtons}"
                 HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
                             <Image Source="pack://application:,,,/Ressources/down.png" 
                    Width="40" Height="40" Stretch="Uniform" />

@@ -1,11 +1,10 @@
-# CsharpMiniProjects
 # Mega Project Center for Tools and Games
 
-This project is a hub that brings together multiple C# applications in a single WPF interface. It includes **six distinct apps** categorized into tools and games, providing a comprehensive desktop experience. The project also leverages AI-driven features for both code and image generation, utilizing ChatGPT for various elements of the development process.
+This project is a hub that brings together multiple C# applications in a single WPF interface. It includes **seven distinct apps** categorized into tools and games, providing a comprehensive desktop experience. The project also leverages AI-driven features for both code and image generation, utilizing ChatGPT for various elements of the development process.
 
 ## Features
 
-- **Unified Interface**: The hub provides a clean and intuitive interface for accessing all six applications.
+- **Unified Interface**: The hub provides a clean and intuitive interface for accessing all seven applications.
 - **Categories**: Applications are divided into two main sections:
   - **Tools**: Productivity and utility apps.
   - **Games**: Interactive and fun game projects with unique mechanics.
@@ -26,6 +25,11 @@ This project is a hub that brings together multiple C# applications in a single 
    - A modern twist on the classic Pong game.
    - Make the ball go faster by hitting it with the paddle.
    - Play against a friend or test your skills against an AI opponent.
+
+3. **Tic Tac Toe**
+   - Play the classic Tic Tac Toe game.
+   - Choose between two-player mode or play against the AI.
+   - Simple and clean interface with smooth gameplay.
 
 ### Tools
 
@@ -85,3 +89,6 @@ Before running the project, make sure to install the following dependencies:
 
 4. Run the project from Visual Studio.
 
+## Contributions
+
+Feel free to submit pull requests or suggest features. Contributions are always welcome!

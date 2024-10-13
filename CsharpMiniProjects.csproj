@@ -31,6 +31,8 @@
     <None Remove="Ressources\Images\PongGameIcon.png" />
     <None Remove="Ressources\Images\SnakeGameIcon.png" />
     <None Remove="Ressources\Images\SnakeGamePicture.png" />
+    <None Remove="Ressources\Images\TicTacToeIcon.png" />
+    <None Remove="Ressources\Images\TicTacToePicture.jpeg" />
     <None Remove="Ressources\Images\ToDoListIcon.png" />
     <None Remove="Ressources\Images\ToDoListPicture.png" />
     <None Remove="Ressources\Images\WorkHoursManagementIcon.png" />
@@ -86,6 +88,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Images\SnakeGamePicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\TicTacToeIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\TicTacToePicture.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Images\ToDoListIcon.png">

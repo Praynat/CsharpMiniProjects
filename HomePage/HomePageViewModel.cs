@@ -56,7 +56,29 @@ public class HomePageViewModel
                 new Bold(new Run("AI.")),
             },
             Identifier = "PongGame" 
-        }
+        },
+        new ListBoxItemData
+        {
+            Title = "TicTacToe Game",
+            ImageSource = "pack://application:,,,/Ressources/Images/TicTacToePicture.jpeg",
+            IconSource = "pack://application:,,,/Ressources/Images/TicTacToeIcon.png",
+            PopupTitle = "TicTacToe Game",
+            PopupDescriptionInlines = new Inline[]
+            {
+                new Bold(new Run("Take turns")),
+                new Run(" placing X or O on the board."),
+                new LineBreak(),
+                new Bold(new Run("Win")),
+                new Run(" by aligning three in a row."),
+                new LineBreak(),
+                new Run("Play against "),
+                new Bold(new Run("AI")),
+                new Run(" or another player."),
+                new LineBreak(),
+            },
+            Identifier = "TicTacToeGame"
+        },
+
     };
 
         // Populate ToolItems collection
@@ -115,18 +137,27 @@ public class HomePageViewModel
 },
 
         new ListBoxItemData
-        {
-            Title = "To Do List",
-            ImageSource = "pack://application:,,,/Ressources/Images/ToDoListPicture.png",
-            IconSource = "pack://application:,,,/Ressources/Images/ToDoListIcon.png",
-            PopupTitle = "Track Your Expenses",
-            PopupDescriptionInlines = new Inline[]
-            {
-                new Run("Manage your"),
-                new Bold(new Run("Tasks")),
-            },
-            Identifier = "ToDoList"
-        },
+{
+    Title = "To Do List",
+    ImageSource = "pack://application:,,,/Ressources/Images/ToDoListPicture.png",
+    IconSource = "pack://application:,,,/Ressources/Images/ToDoListIcon.png",
+    PopupTitle = "To Do List",
+    PopupDescriptionInlines = new Inline[]
+    {   
+        new Run("Stay organized by managing your "),
+        new Bold(new Run("tasks")),
+        new Run(" efficiently."),
+        new LineBreak(),
+        new Bold(new Run("Add, edit,")),
+        new Run(" and"),
+        new Bold(new Run(" delete")),
+        new Run(" your tasks."),
+        new LineBreak(),
+        
+    },
+    Identifier = "ToDoList"
+},
+
         new ListBoxItemData
         {
             Title = "Countries Encyclopedia",

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,20 +25,13 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
             listTasks.ItemsSource = _todoList.Tasks;
         }
 
-        // OnTaskToggled
         private void OnTaskToggled(object sender, RoutedEventArgs e)
         {
-            if (sender is CheckBox checkBox && checkBox.DataContext is TaskModel task)
-            {
-                _todoList.ToggleTaskIsComplete(task.Id);
-            }
+            // No additional code needed; binding handles property change
         }
-
-        
 
         private void OnSaveEdit(object sender, RoutedEventArgs e)
         {
-            // Get the elements
             Button btnSave = sender as Button;
             StackPanel parent = btnSave.Parent as StackPanel;
             TextBox editTextBox = parent.FindName("editTaskDescription") as TextBox;
@@ -53,16 +47,16 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
             textBlock.Visibility = Visibility.Visible;
 
             // Update the task description
-            textBlock.Text = editTextBox.Text;
-            _todoList.UpdateTask(task.Id, editTextBox.Text);
+            if (textBlock.Text != editTextBox.Text)
+            {
+                _todoList.UpdateTask(task.Id, editTextBox.Text);
+            }
         }
 
         private void OnDeleteTask(object sender, RoutedEventArgs e)
         {
-            // Get the TaskModel associated with the clicked delete button
             if (sender is Button deleteButton && deleteButton.DataContext is TaskModel task)
             {
-                // Confirm deletion (optional)
                 MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the task '{task.Description}'?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -90,16 +84,17 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
             Button btnSave = parent.FindName("btnSave") as Button;
             Button btnDelete = parent.FindName("btnDelete") as Button;
 
-            
+            // Hide edit controls
             editTextBox.Visibility = Visibility.Collapsed;
             btnSave.Visibility = Visibility.Collapsed;
             btnDelete.Visibility = Visibility.Collapsed;
-            
+
+            // Show the TextBlock
             textBlock.Visibility = Visibility.Visible;
 
+            // Update the task description
             if (textBlock.Text != editTextBox.Text)
             {
-                textBlock.Text = editTextBox.Text;
                 if (textBlock.DataContext is TaskModel task)
                 {
                     _todoList.UpdateTask(task.Id, editTextBox.Text);
@@ -111,16 +106,13 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
         {
             if (sender is ListBoxItem listBoxItem)
             {
-                
                 e.Handled = true;
 
                 var contentPresenter = FindVisualChild<ContentPresenter>(listBoxItem);
                 if (contentPresenter != null)
                 {
-                   
                     var dataTemplateRoot = VisualTreeHelper.GetChild(contentPresenter, 0);
 
-                
                     var textBlock = FindVisualChildByName<TextBlock>(dataTemplateRoot, "txtTaskDescription");
                     var editTextBox = FindVisualChildByName<TextBox>(dataTemplateRoot, "editTaskDescription");
                     var btnSave = FindVisualChildByName<Button>(dataTemplateRoot, "btnSave");
@@ -128,16 +120,16 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
 
                     if (textBlock != null && editTextBox != null && btnSave != null && btnDelete != null)
                     {
-                        
+                        // Hide the TextBlock
                         textBlock.Visibility = Visibility.Collapsed;
-                     
+
+                        // Show the TextBox and buttons
                         editTextBox.Visibility = Visibility.Visible;
                         btnSave.Visibility = Visibility.Visible;
                         btnDelete.Visibility = Visibility.Visible;
 
-                     
+                        // Set focus to the TextBox
                         editTextBox.Text = textBlock.Text;
-                       
                         editTextBox.Focus();
                     }
                 }
@@ -160,58 +152,39 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
             }
             return null;
         }
-
-        private T FindVisualChildByName<T>(DependencyObject parent, string name) where T : DependencyObject
+        private T FindVisualChildByName<T>(DependencyObject parent, string name) where T : FrameworkElement
         {
             if (parent == null)
                 return null;
 
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child is FrameworkElement frameworkElement && frameworkElement.Name == name)
+                var child = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                if (child != null)
                 {
-                    return (T)child;
-                }
+                    if (child.Name == name)
+                        return (T)child;
 
-                var result = FindVisualChildByName<T>(child, name);
-                if (result != null)
-                    return result;
+                    var result = FindVisualChildByName<T>(child, name);
+                    if (result != null)
+                        return result;
+                }
             }
             return null;
         }
 
         private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
             var focusedElement = Keyboard.FocusedElement as DependencyObject;
-            if (focusedElement != null)
+            if (focusedElement is TextBox textBox && textBox.Name == "editTaskDescription")
             {
-               
-                if (focusedElement is TextBox textBox && textBox.Name == "editTaskDescription")
-                {
-                   
-                    Keyboard.ClearFocus();
-                }
+                Keyboard.ClearFocus();
+                e.Handled = true;
             }
         }
-
-
-        private T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            DependencyObject parent = VisualTreeHelper.GetParent(child);
-            while (parent != null && !(parent is T))
-            {
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-            return parent as T;
-        }
-
-
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate back or to the desired page
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
@@ -219,6 +192,18 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
             else
             {
                 NavigationService.Navigate(new HomePage.HomePage());
+            }
+        }
+
+        private void EditTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                OnSaveEdit(sender, new RoutedEventArgs());
+            }
+            else if (e.Key == Key.Escape)
+            {
+                OnEditTextBoxLostFocus(sender, new RoutedEventArgs());
             }
         }
     }

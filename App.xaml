@@ -9,8 +9,8 @@
         <FontFamily x:Key="ShrikhandFont">pack://application:,,,/Ressources/Fonts/#Shrikhand</FontFamily>
 
 
-        <!-- Main Button Style & Main Menu Hover Effect -->
-        <Style  TargetType="Button">
+        <!-- Main menu Button Style & Main Menu Hover Effect -->
+        <Style  x:Key="MainMenuButtons" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
@@ -94,10 +94,47 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        
-        
-        
+
+        <!-- Autumn default Button Style -->
+        <Style  TargetType="Button">
+            <!-- Base design -->
+            <Setter Property="Background" Value="#F8CBA1"/>
+            <!-- Soft pastel orange -->
+            <Setter Property="Foreground" Value="Black"/>
+            <!-- Text color -->
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <!-- Black border -->
+            <Setter Property="BorderThickness" Value="1"/>
+            <!-- Border thickness -->
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                     BorderBrush="{TemplateBinding BorderBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}" 
+                     CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Hover effect -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E8B88A"/>
+                    <!-- Slightly darker pastel orange for hover -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+
         <!-- Return Button Style with Hover Effect-->
         <Style x:Key="ReturnButtonStyle"  TargetType="Button">
             <Setter Property="FontSize" Value="15"/>

@@ -243,8 +243,14 @@ namespace CsharpMiniProjects.Games.SnakeGame
         }
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate back to the HomePage
-            this.NavigationService.Navigate(new HomePage.HomePage());
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                this.NavigationService.Navigate(new HomePage.HomePage());
+            }
         }
     }
 }

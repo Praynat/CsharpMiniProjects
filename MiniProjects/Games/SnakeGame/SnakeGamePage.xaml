@@ -54,9 +54,9 @@
         <!-- Overlay for Play/Pause -->
         <Border x:Name="PlayPauseOverlay" Background="#80000000" Visibility="Visible" Grid.RowSpan="2" Width="550">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Snake Game" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="0, 0, 0, 20"/>
-                <Button Content="Play" FontSize="20" Padding="20, 10" Click="PlayButton_Click" HorizontalAlignment="Center" Width="89"/>
-                <Button x:Name="ResetButton1" Content="Reset" FontSize="20" Padding="20, 10" Click="ResetButton_Click" Margin="0,20,0,0" HorizontalAlignment="Center"  />
+                <TextBlock Text="Snake Game" FontSize="40" Foreground="White" HorizontalAlignment="Center" Margin="0, 0, 0, 30"  FontFamily="{StaticResource KavoonFont}"/>
+                <Button Content="Play" FontSize="16" Padding="20, 10" Click="PlayButton_Click" HorizontalAlignment="Center" Width="89" Style="{StaticResource AutumnButtonStyle}"/>
+                <Button x:Name="ResetButton1" Content="Reset" FontSize="16" Padding="20, 10" Click="ResetButton_Click" Margin="0,20,0,0" HorizontalAlignment="Center" Style="{StaticResource AutumnButtonStyle}" Width="92" />
             </StackPanel>
         </Border>
 
