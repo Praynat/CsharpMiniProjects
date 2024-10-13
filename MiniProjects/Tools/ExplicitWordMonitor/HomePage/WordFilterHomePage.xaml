@@ -5,28 +5,59 @@
 
     <Viewbox Stretch="Uniform" StretchDirection="Both" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-        <StackPanel Background="White" Height="388">
+        <StackPanel Background="White" Height="450">
             <!-- Popup definition -->
             <Popup Name="infoPopup" Placement="Center" IsOpen="True" StaysOpen="False">
                 <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10">
                     <StackPanel Width="400">
                         <TextBlock Text="Welcome to Explicit Word Monitor" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10"/>
                         <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
-    This application monitors your typing in other applications. If you type an explicit word in any other app on your PC, this app will automatically close that application.
-    You cannot close this window unless you have the password. <Run FontWeight="Bold">The default password is '1234'</Run>, but you should change it.
-    The app comes with a preset list of explicit words in English, French, and Hebrew. You can also add any word that you would like to block.
+    "This app "
+    <Run FontWeight="Bold">filters bad words</Run>
+    " across the computer, blocking them from both "
+    <Run FontWeight="Bold">user input</Run>
+    " and "
+    <Run FontWeight="Bold">internet DNS requests</Run>
+    ".<LineBreak />
+                            When bad words are detected, the app "
+    <Run FontWeight="Bold">automatically closes</Run>
+                            <LineBreak />
+    ". It includes built-in word lists in "
+    <Run FontWeight="Bold">French</Run>
+    ", "
+    <Run FontWeight="Bold">English</Run>
+    ", and "
+    <Run FontWeight="Bold">Hebrew</Run>
+                            <LineBreak /> <LineBreak />
+    ". Users can "
+    <Run FontWeight="Bold">add personalized forbidden words</Run>
+    ", with the ability to "
+    <Run FontWeight="Bold">view</Run>
+    " the custom list. 
+                            <LineBreak />The app is protected by a "
+    <Run FontWeight="Bold">password</Run>
+    " (default: "
+    <Run FontWeight="Bold">1234</Run>
+    ") to prevent unauthorized closure or deletion of words, and only the password allows word removal from the custom list."
                         </TextBlock>
-
-                        <TextBlock Text="Example: Adding the word 'test' to the block list will close any app where you type the word 'test'." TextWrapping="Wrap" FontWeight="Bold" Margin="0,0,0,10"/>
 
                         <CheckBox Name="chkDontShowAgain" Content="Don't show this message again" Margin="0,10,0,10"/>
 
-                        <Button Content="Close" Width="100" HorizontalAlignment="Center" Click="ClosePopup_Click"/>
+                        <Button Content="Close" Width="100" HorizontalAlignment="Center" Style="{StaticResource AutumnButtonStyle}" Click="ClosePopup_Click"/>
                     </StackPanel>
                 </Border>
             </Popup>
             <!-- Section pour afficher la liste des mots explicites -->
             <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Warning: Not closing the app normally could interfere with DNS settings or block internet access."
+                   Foreground="Red"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="10"
+                   TextWrapping="Wrap" />
+               
                 <Label Content="Reduce this window and let it run in the background to filter your internet" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Regular" Margin="20,0,20,10" />
                 <Label Content="Explicit Words List:" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
                 <ComboBox x:Name="cmbExplicitWords" Width="300" HorizontalAlignment="Center">
@@ -34,7 +65,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Center" Width="200" />
-                                <Button Content="X" Width="20" HorizontalAlignment="Right" 
+                                <Button Content="X" Width="15" Height="15" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource AutumnButtonStyle}" 
                                         CommandParameter="{Binding}" Margin="70,0,0,0" 
                                         Click="DeleteWord_Click" />
                             </StackPanel>
@@ -47,8 +78,8 @@
             <StackPanel Margin="0,0,0,20">
                 <Label Content="Add Explicit Word:" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Width="312">
-                    <TextBox x:Name="txtNewWord" Width="200"/>
-                    <Button Content="Add Word" Width="100" Margin="10,0,0,0" Click="btnAddWord_Click"/>
+                    <TextBox x:Name="txtNewWord" Width="200" VerticalAlignment="Center"/>
+                    <Button Content="Add Word" Width="100" Margin="10,0,0,0" Style="{StaticResource AutumnButtonStyle}" Click="btnAddWord_Click"/>
                 </StackPanel>
             </StackPanel>
 
@@ -64,7 +95,7 @@
                         <Label Content="Enter new password:" HorizontalAlignment="Center"/>
                         <PasswordBox x:Name="txtNewPassword" Width="200"/>
                     </StackPanel>
-                    <Button Content="Change Password" Width="151" Click="btnChangePassword_Click"/>
+                    <Button Content="Change Password" Height="30" Width="151" Click="btnChangePassword_Click" Style="{StaticResource AutumnButtonStyle}"/>
                 </StackPanel>
             </Expander>
 

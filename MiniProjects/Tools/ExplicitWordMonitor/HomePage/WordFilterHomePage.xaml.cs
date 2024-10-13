@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
@@ -7,6 +8,8 @@ using System.Windows;
 using Gma.System.MouseKeyHook;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Controls.Primitives;
+using CsharpMiniProjects.MiniProjects.Tools.ExplicitWordMonitor.Helpers;
 
 namespace ExplicitWordMonitor.HomePage
 {
@@ -128,9 +131,9 @@ namespace ExplicitWordMonitor.HomePage
             if (!string.IsNullOrWhiteSpace(txtNewWord.Text) && !UserAddedWords.Contains(txtNewWord.Text))
             {
                 UserAddedWords.Add(txtNewWord.Text);
-                System.Windows.MessageBox.Show("Word added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ToastHelper.ShowToast("Word added successfully!", Window.GetWindow(this));
                 txtNewWord.Clear();
-                UpdateComboBox(); 
+                UpdateComboBox();
                 SaveUserAddedWords();
 
                 BadWordsListUpdated?.Invoke(GetAllBadWords());
@@ -169,12 +172,12 @@ namespace ExplicitWordMonitor.HomePage
 
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            if (txtOldPassword.Password == Password) 
+            if (txtOldPassword.Password == Password)
             {
                 if (!string.IsNullOrWhiteSpace(txtNewPassword.Password))
                 {
-                    Password = txtNewPassword.Password; 
-                    System.Windows.MessageBox.Show("Password changed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Password = txtNewPassword.Password;
+                    ToastHelper.ShowToast("Password changed successfully!", Window.GetWindow(this));
                     txtOldPassword.Clear();
                     txtNewPassword.Clear();
                 }
@@ -215,7 +218,7 @@ namespace ExplicitWordMonitor.HomePage
 
             lock (_lock)
             {
-                
+
                 foreach (var word in DefaultWords)
                 {
                     if (_inputByWindow[currentWindowHandle].EndsWith(word, StringComparison.OrdinalIgnoreCase))
@@ -313,7 +316,7 @@ namespace ExplicitWordMonitor.HomePage
                 if (UserAddedWords.Contains(wordToDelete))
                 {
                     UserAddedWords.Remove(wordToDelete);
-                    System.Windows.MessageBox.Show("Word deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ToastHelper.ShowToast("Word deleted successfully!", Window.GetWindow(this));
                     UpdateComboBox(); // Refresh the ComboBox after deletion
                     SaveUserAddedWords(); // Save updated list
                 }
@@ -330,7 +333,7 @@ namespace ExplicitWordMonitor.HomePage
             Window passwordWindow = new Window
             {
                 Title = "Enter Password",
-                Width = 300,
+                Width = 400,
                 Height = 150,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize
@@ -338,9 +341,15 @@ namespace ExplicitWordMonitor.HomePage
 
             StackPanel panel = new StackPanel { Margin = new Thickness(10) };
             PasswordBox passwordBox = new PasswordBox { Width = 200 };
-            System.Windows.Controls.Button submitButton = new System.Windows.Controls.Button { Content = "Submit", Width = 100, Margin = new Thickness(0, 10, 0, 0) };
+            System.Windows.Controls.Button submitButton = new System.Windows.Controls.Button
+            {
+                Content = "Submit",
+                Width = 100,
+                Margin = new Thickness(0, 10, 0, 0),
+                Style = (Style)System.Windows.Application.Current.Resources["AutumnButtonStyle"]
+            };
 
-            panel.Children.Add(new System.Windows.Controls.Label { Content = "Please enter the password to delete the word:" });
+            panel.Children.Add(new System.Windows.Controls.Label { Content = "Please enter the password to delete the word (default: 1234):" });
             panel.Children.Add(passwordBox);
             panel.Children.Add(submitButton);
 
@@ -365,6 +374,7 @@ namespace ExplicitWordMonitor.HomePage
 
             return isPasswordCorrect;
         }
-
     }
+
+
 }

@@ -34,10 +34,7 @@
                              To="200"
                              Duration="0:0:0.3" />
         </Storyboard>
-        <!-- Define Font Families -->
-            <FontFamily x:Key="KavoonFont">pack://application:,,,/Ressources/Fonts/#Kavoon</FontFamily>
-
-    </Page.Resources>
+     </Page.Resources>
 
 
    
@@ -45,9 +42,8 @@
     <Grid MouseDown="Grid_MouseDown">
 
         <!--Return Button-->
-        <Button Content="← Back" FontSize="15" FontFamily="{StaticResource KavoonFont}" 
-Width="121" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"
-Click="ReturnButton_Click" Background="White" Foreground="Black" BorderBrush="{x:Null}" Panel.ZIndex="10"/>
+        <Button Content="← Back" Click="ReturnButton_Click" Style="{StaticResource ReturnButtonStyle}"/>
+
         <!-- Select Date Ranges for Summary Popup-->
         <Popup x:Name="DateRangePopup" Placement="Center" StaysOpen="False" AllowsTransparency="True">
             <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10" CornerRadius="5">
@@ -74,10 +70,51 @@ Click="ReturnButton_Click" Background="White" Foreground="Black" BorderBrush="{x
         </Popup>
 
         <!-- Choose Work Year Popup -->
-        <Popup x:Name="ChooseWorkYearPopup" Placement="Center" StaysOpen="False" AllowsTransparency="True" IsOpen="True">
-            <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10" CornerRadius="5">
-                <local:ChooseWorkYear x:Name="ChooseWorkYearControl" 
-                                      />
+        <Popup x:Name="ChooseWorkYearPopup" Placement="Center" StaysOpen="False" AllowsTransparency="True" IsOpen="False">
+            <!-- Wrap the content in a Grid and apply the scale -->
+            <Grid RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                </Grid.RenderTransform>
+
+                <!-- Border and popup contents -->
+                <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10" CornerRadius="5">
+                    <local:ChooseWorkYear x:Name="ChooseWorkYearControl"/>
+                </Border>
+            </Grid>
+        </Popup>
+
+        <!-- Info Popup -->
+        <Popup Name="infoPopup" Placement="Center" IsOpen="True" StaysOpen="False">
+            <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10">
+                <StackPanel Width="400">
+                    <TextBlock Text="Welcome to the Work Hour Management App" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Margin="0,10,0,10" TextAlignment="Center"  FontStyle="Italic" FontSize="11" Foreground="Gray">
+    "The WorkHourManagement App is the perfect tool for desktop users looking to manage their work hours and earnings efficiently."
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+This app is designed for individuals who want an easy and flexible way to 
+    <Run FontWeight="Bold">track </Run> their <Run FontWeight="Bold">work hours</Run> and <Run FontWeight="Bold">calculate total hours across specific date ranges</Run>. 
+                            <LineBreak />
+
+    You can <Run FontWeight="Bold">create and manage multiple work years</Run>, each representing different jobs or periods, 
+    allowing you to track hours for multiple jobs.
+    <LineBreak />
+                            <LineBreak />
+
+
+    In addition, you can <Run FontWeight="Bold">define your hourly fee for each work year</Run> and 
+    <Run FontWeight="Bold">calculate total fees based on the hours worked</Run>. 
+    The app lets you easily adjust start and end times for each day, as well as add 
+    <Run FontWeight="Bold">missed or extra hours</Run>. 
+
+                    </TextBlock>
+
+                  <CheckBox Name="chkDontShowAgain" Content="Don't show this message again" Margin="0,10,0,10"/>
+
+                    <Button Content="Go to Work Years Management Panel" Width="250" HorizontalAlignment="Center" Style="{StaticResource AutumnButtonStyle}" Height="30" Click="ClosePopup_Click"/>
+                </StackPanel>
             </Border>
         </Popup>
 
@@ -101,7 +138,7 @@ Click="ReturnButton_Click" Background="White" Foreground="Black" BorderBrush="{x
 
                 <StackPanel Grid.Column="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Viewbox>
-                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="5" Padding="10">
+                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="5" Padding="12">
                             <Border.Background>
                                 <SolidColorBrush Color="#FF72DFD9" Opacity="0.5"/>
                             </Border.Background>
@@ -119,7 +156,7 @@ Click="ReturnButton_Click" Background="White" Foreground="Black" BorderBrush="{x
                     </Viewbox>
 
                     <Viewbox>
-                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="5" Padding="10">
+                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="5" Padding="5">
                             <Border.Background>
                                 <SolidColorBrush Color="#FFE98B99" Opacity="0.485"/>
                             </Border.Background>
@@ -140,10 +177,9 @@ Click="ReturnButton_Click" Background="White" Foreground="Black" BorderBrush="{x
                 <TranslateTransform x:Name="MenuTransform" X="200"/>
             </StackPanel.RenderTransform>
             <TextBlock FontSize="20" FontFamily="Aharoni" FontWeight="Bold" FontStretch="Condensed" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,20">Options</TextBlock>
-            <Button Content="Show Summary by dates" Margin="10" Click="ShowSummaryButton_Click"/>
-            <Button Content="Manage Work Years" Margin="10" Click="ChangeWorkYearButton_Click"/>
-            <Button Content="Manage Weekly Planning" Margin="10"/>
-            <Button Content="Change default WorkHour Fee" Margin="10" Click="WorkHourFeeButton_Click"/>
+            <Button Content="Show Summary by dates" Margin="10" Click="ShowSummaryButton_Click" Height="25" Style="{StaticResource AutumnButtonStyle}"/>
+            <Button Content="Manage Work Years" Margin="10" Click="ChangeWorkYearButton_Click" Height="25" Style="{StaticResource AutumnButtonStyle}"/>
+            <Button Content="Change default WorkHour Fee" Margin="10" Click="WorkHourFeeButton_Click" Height="25" Style="{StaticResource AutumnButtonStyle}"/>
         </StackPanel>
         
 

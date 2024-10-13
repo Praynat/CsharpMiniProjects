@@ -26,6 +26,7 @@ namespace CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages
         public ObservableCollection<DailyWorkHours> DailyWorkHoursItems { get; set; }
         private List<DateTime> allBlackoutDates;
         private WorkYear CurrentWorkYear { get; set; }
+        private string dontShowFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DontShowAgainWorkHourManagement.txt");
 
         public WorkHoursHomePage()
         {
@@ -64,6 +65,13 @@ namespace CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages
             dateRangeSelector.DatesSelected += DateRangeSelector_DatesSelected;
             DateRangePopup.Child = dateRangeSelector;
             SummaryPopupControl.OnHourlyRateTextboxChange += UpdateWorkYearHourlyRate;
+
+            bool dontShow = DontShowAgain();
+            // Hide the info popup if the user has chosen "Don't show again"
+            if (dontShow)
+            {
+                infoPopup.IsOpen = false;
+            }
         }
 
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -414,10 +422,37 @@ namespace CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages
         }
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
+            // Save user data if needed
             SaveUserData(currentUser, userDataFilePath);
-            // Navigate back to the HomePage
-            this.NavigationService.Navigate(new HomePage.HomePage());
 
+            // Navigate back to the previous page if possible
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                this.NavigationService.Navigate(new HomePage.HomePage());
+            }
+        }
+
+        private bool DontShowAgain()
+        {
+            return File.Exists(dontShowFilePath) && File.ReadAllText(dontShowFilePath) == "true";
+        }
+
+        private void ClosePopup_Click(object sender, RoutedEventArgs e)
+        {
+            // Hide the popup
+            infoPopup.IsOpen = false;
+            ChooseWorkYearPopup.IsOpen = true;
+
+            // Save the "Don't show again" preference if checked
+            if (chkDontShowAgain.IsChecked == true)
+            {
+                File.WriteAllText(dontShowFilePath, "true");
+                System.Windows.MessageBox.Show("You won't see this popup again.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 

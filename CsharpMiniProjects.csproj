@@ -10,6 +10,10 @@
 
   <ItemGroup>
     <None Remove="HomePage\snake-game-screenshot.png" />
+    <None Remove="MiniProjects\Games\PongGame\Sounds\ArcadeGoal.wav" />
+    <None Remove="MiniProjects\Games\PongGame\Sounds\hit.wav" />
+    <None Remove="MiniProjects\Games\PongGame\Sounds\WallTapSound.wav" />
+    <None Remove="MiniProjects\Games\PongGame\Sounds\WallTapSoundQuiet.wav" />
     <None Remove="MiniProjects\Games\SnakeGame\myApple.png" />
     <None Remove="MiniProjects\Tools\ExplicitWordMonitor\Resources\DefaultWords.txt" />
     <None Remove="MiniProjects\Tools\WorkHoursManagementApp\Ressources\time-management.ico" />
@@ -18,11 +22,17 @@
     <None Remove="Ressources\Fonts\Kavoon-Regular.ttf" />
     <None Remove="Ressources\Fonts\Shrikhand-Regular.ttf" />
     <None Remove="Ressources\GameIcon.png" />
+    <None Remove="Ressources\Images\CountriesEncyclopediaIcon.png" />
+    <None Remove="Ressources\Images\CountriesEncyclopediaPicture.png" />
     <None Remove="Ressources\Images\CsharpIcon.png" />
     <None Remove="Ressources\Images\ExplicitWordFilterIcon.png" />
     <None Remove="Ressources\Images\ExplicitWordFilterPicture.jpg" />
+    <None Remove="Ressources\Images\PongGame.jpg" />
+    <None Remove="Ressources\Images\PongGameIcon.png" />
     <None Remove="Ressources\Images\SnakeGameIcon.png" />
     <None Remove="Ressources\Images\SnakeGamePicture.png" />
+    <None Remove="Ressources\Images\ToDoListIcon.png" />
+    <None Remove="Ressources\Images\ToDoListPicture.png" />
     <None Remove="Ressources\Images\WorkHoursManagementIcon.png" />
     <None Remove="Ressources\Images\WorkHoursManagementPicture.png" />
     <None Remove="Ressources\Images\WorkHoursManagementRoundIcon.png" />
@@ -39,6 +49,24 @@
     <Content Include="MiniProjects\Tools\ExplicitWordMonitor\Resources\DefaultWords.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="MiniProjects\Games\PongGame\Sounds\ArcadeGoal.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MiniProjects\Games\PongGame\Sounds\hit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MiniProjects\Games\PongGame\Sounds\WallTapSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MiniProjects\Games\PongGame\Sounds\WallTapSoundQuiet.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\CountriesEncyclopediaIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\CountriesEncyclopediaPicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Images\CsharpIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -48,10 +76,22 @@
     <Resource Include="Ressources\Images\ExplicitWordFilterPicture.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Ressources\Images\PongGame.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\PongGameIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Images\SnakeGameIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Images\SnakeGamePicture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\ToDoListIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Images\ToDoListPicture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Images\WorkHoursManagementIcon.png">

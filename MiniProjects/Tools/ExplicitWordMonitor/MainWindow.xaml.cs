@@ -19,8 +19,7 @@ namespace ExplicitWordMonitor
             mainFrame.Navigate(_homePage);
             this.Closing += MainWindow_Closing;
 
-            this.Closing += MainWindow_Closing;
-
+            
             // Start the proxy server
             List<string> allBadWords = _homePage.GetAllBadWords();
             webFilterProxy = new WebFilterProxy(allBadWords);
@@ -62,7 +61,7 @@ namespace ExplicitWordMonitor
             Window passwordWindow = new Window
             {
                 Title = "Enter Password",
-                Width = 300,
+                Width = 400,
                 Height = 150,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize
@@ -70,9 +69,15 @@ namespace ExplicitWordMonitor
 
             StackPanel panel = new StackPanel { Margin = new Thickness(10) };
             PasswordBox passwordBox = new PasswordBox { Width = 200 };
-            Button submitButton = new Button { Content = "Submit", Width = 100, Margin = new Thickness(0, 10, 0, 0) };
+            Button submitButton = new Button
+            {
+                Content = "Submit",
+                Width = 100,
+                Margin = new Thickness(0, 10, 0, 0),
+                Style = (Style)System.Windows.Application.Current.Resources["AutumnButtonStyle"]
+            };
 
-            panel.Children.Add(new Label { Content = "Please enter the password to close the application:" });
+            panel.Children.Add(new Label { Content = "Please enter the password to close the application (default: 1234):" });
             panel.Children.Add(passwordBox);
             panel.Children.Add(submitButton);
 

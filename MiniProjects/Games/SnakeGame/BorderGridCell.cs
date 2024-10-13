@@ -17,7 +17,7 @@ namespace CsharpMiniProjects.Games.SnakeGame
             border = new Border
             {
                 BorderBrush = Brushes.White,
-                BorderThickness = new Thickness(0.2),
+                BorderThickness = new Thickness(0.0),
             };
 
             shape = new Rectangle
@@ -26,7 +26,7 @@ namespace CsharpMiniProjects.Games.SnakeGame
                 RadiusX = 2,
                 RadiusY = 2,
                 Stretch = Stretch.Fill,
-                Margin = new Thickness(1)
+                Margin = new Thickness(0)
             };
             border.Child = shape;
             Children.Add(border);

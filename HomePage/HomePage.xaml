@@ -3,60 +3,104 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:CsharpMiniProjects.UserControls"
         xmlns:utils="clr-namespace:CsharpMiniProjects.Utilities"
-    Title="Mini Projects" Height="400" Width="600" Background="White">
+    Title="Mini Projects" Height="400" Width="500" Background="White">
 
 
     <Page.Resources>
-        <!-- Define Font Families -->
-        <FontFamily x:Key="ShrikhandFont">pack://application:,,,/Ressources/Fonts/#Shrikhand</FontFamily>
-        <FontFamily x:Key="KavoonFont">pack://application:,,,/Ressources/Fonts/#Kavoon</FontFamily>
 
-        <!-- Button Style for Hover Effect -->
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1.08" Duration="0:0:0.2" />
-                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1.08" Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1" Duration="0:0:0.2" />
-                                <DoubleAnimation Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1" Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <!-- Slide Main Section in from left with ease-in -->
+        <Storyboard x:Key="SlideMainInFromLeft">
+            <DoubleAnimation Storyboard.TargetName="MainSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="-570" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Main Section in from right with ease-in -->
+        <Storyboard x:Key="SlideMainInFromRight">
+            <DoubleAnimation Storyboard.TargetName="MainSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="570" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Main Section out to the right with ease-out -->
+        <Storyboard x:Key="SlideMainOutToRight">
+            <DoubleAnimation Storyboard.TargetName="MainSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="0" To="570" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Main Section out to the left with ease-out -->
+        <Storyboard x:Key="SlideMainOutToLeft">
+            <DoubleAnimation Storyboard.TargetName="MainSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="0" To="-570" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Tools Section in from the left with ease-in -->
+        <Storyboard x:Key="SlideToolsInFromLeft">
+            <DoubleAnimation Storyboard.TargetName="ToolsSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="-570" To="-25" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Games Section in from the right with ease-in -->
+        <Storyboard x:Key="SlideGamesInFromRight">
+            <DoubleAnimation Storyboard.TargetName="GamesSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="570" To="25" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Tools Section out to the left with ease-out -->
+        <Storyboard x:Key="SlideToolsOutToLeft">
+            <DoubleAnimation Storyboard.TargetName="ToolsSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="-25" To="-570" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Slide Games Section out to the right with ease-out -->
+        <Storyboard x:Key="SlideGamesOutToRight">
+            <DoubleAnimation Storyboard.TargetName="GamesSectionTranslate"
+                     Storyboard.TargetProperty="X"
+                     From="25" To="570" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+
+
+
+
+
         <!-- Style for ListBoxItem -->
         <Style TargetType="ListBoxItem" x:Key="CustomListBoxItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -75,11 +119,17 @@
         </Style>
     </Page.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="10" CornerRadius="15" Background="#A8E5DD" Margin="10" Padding="10">
-        <Viewbox Stretch="Uniform" Margin="20" >
-            <Grid x:Name="MainGrid">
+    <Border BorderBrush="Black" BorderThickness="10" CornerRadius="15" Background="#A8E5DD" Margin="5,25" Padding="0" >
+        <Viewbox Stretch="Uniform" Margin="0" >
+            <Grid x:Name="MainGrid" ClipToBounds="True" Width="560">
                 <!-- Main Section -->
-                <Grid x:Name="MainSection" Visibility="Visible" >
+                <Grid x:Name="MainSection" Visibility="Visible"  RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform x:Name="MainSectionTranslate" X="0"/>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
                     <!-- Main Section Content -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -106,15 +156,15 @@
                     </StackPanel>
 
                     <!-- Icons and Labels -->
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-80,0,0">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                            <Button Width="100" Height="100" BorderThickness="0" Click="OnToolsButtonClick">
+                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnToolsButtonClick" >
                                 <Image Source="/Ressources/AppsMenuIcon.png" Width="90" Height="100"/>
                             </Button>
                             <TextBlock Text="Tools" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                            <Button Width="100" Height="100" BorderThickness="0" Click="OnGamesButtonClick">
+                            <Button Width="100" Height="100"  BorderThickness="0" Click="OnGamesButtonClick">
                                 <Image Source="/Ressources/GameIcon.png" Width="90" Height="100"/>
                             </Button>
                             <TextBlock Text="Games" FontFamily="{StaticResource KavoonFont}" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0" />
@@ -123,7 +173,14 @@
                 </Grid>
 
                 <!-- Game Section -->
-                <Grid x:Name="GamesSection" Visibility="Collapsed" HorizontalAlignment="Right" Width="550" >
+                <Grid x:Name="GamesSection" Visibility="Visible" HorizontalAlignment="Right" Width="550"  RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                            <TranslateTransform x:Name="GamesSectionTranslate" X="700"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="0*" />
@@ -198,7 +255,14 @@ HorizontalAlignment="Center" Margin="0,0,0,0" BorderThickness="0">
 
 
                 <!-- Tool Section -->
-                <Grid x:Name="ToolsSection" Visibility="Collapsed" HorizontalAlignment="Left" Width="550">
+                <Grid x:Name="ToolsSection" Visibility="Visible" HorizontalAlignment="Left" Width="550"  RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                        <TranslateTransform x:Name="ToolsSectionTranslate" X="-700"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="0*" />
@@ -271,6 +335,8 @@ Click="OnToolsBackButtonClick" Grid.Column="1" Margin="0,0,0,0"/>
                         </Button>
                     </StackPanel>
                 </Grid>
+
+    <!-- Popups -->
                 <!--General Popup -->
                 <Popup x:Name="popupInfo"
                AllowsTransparency="True"

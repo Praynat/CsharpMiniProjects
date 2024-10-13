@@ -46,6 +46,18 @@ namespace CsharpMiniProjects.MiniProjects.Tools.ToDoList
         {
             Tasks.Add(task);
         }
+        public void RemoveTask(int taskId)
+        {
+            TaskModel task = Tasks.FirstOrDefault(t => t.Id == taskId);
+            if (task != null)
+            {
+                Tasks.Remove(task);
+            }
+            else
+            {
+                throw new Exception("The task with this Id wasn't found");
+            }
+        }
 
     }
 }

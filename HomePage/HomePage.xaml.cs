@@ -1,19 +1,22 @@
 ﻿    
 using CsharpMiniProjects.Games.SnakeGame;
+using CsharpMiniProjects.MiniProjects.Games.PongGame;
+using CsharpMiniProjects.MiniProjects.Tools.Countries;
 using CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages;
 using CsharpMiniProjects.UserControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 
 namespace CsharpMiniProjects.HomePage
 {
-
     public partial class HomePage : Page
     {
+    private string activeSection;
         public HomePage()
         {
             InitializeComponent();
@@ -21,30 +24,49 @@ namespace CsharpMiniProjects.HomePage
         }
         private void OnToolsButtonClick(object sender, RoutedEventArgs e)
         {
-            ToolsSection.Visibility = Visibility.Visible;
-            MainSection.Visibility = Visibility.Collapsed;
-            GamesSection.Visibility = Visibility.Collapsed;
+            // Slide Main out to the right and Tools in from the left
+            var slideOutMain = (Storyboard)this.Resources["SlideMainOutToRight"];
+            var slideInTools = (Storyboard)this.Resources["SlideToolsInFromLeft"];
+
+
+            slideOutMain.Begin();
+            slideInTools.Begin();
+            activeSection = "Tools";
             this.Focus();
 
         }
 
         private void OnGamesButtonClick(object sender, RoutedEventArgs e)
         {
-            GamesSection.Visibility = Visibility.Visible;
-            MainSection.Visibility = Visibility.Collapsed;
-            ToolsSection.Visibility = Visibility.Collapsed;
+            // Slide Main out to the left and Games in from the right
+            var slideOutMain = (Storyboard)this.Resources["SlideMainOutToLeft"];
+            var slideInGames = (Storyboard)this.Resources["SlideGamesInFromRight"];
+
+
+            slideOutMain.Begin();
+            slideInGames.Begin();
+            activeSection = "Games";
             this.Focus();
         }
         private void OnGamesBackButtonClick(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new HomePage());
+            // Slide Games out to the right and Main in from the left
+            var slideOutGames = (Storyboard)this.Resources["SlideGamesOutToRight"];
+            var slideInMain = (Storyboard)this.Resources["SlideMainInFromLeft"];
+
+
+            slideOutGames.Begin();
+            slideInMain.Begin();
         }
         private void OnToolsBackButtonClick(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new HomePage());
-            //GamesSection.Visibility = Visibility.Collapsed;
-            //ToolsSection.Visibility = Visibility.Collapsed;
-            //MainSection.Visibility = Visibility.Visible;
+            // Slide Tools out to the left and Main in from the right
+            var slideOutTools = (Storyboard)this.Resources["SlideToolsOutToLeft"];
+            var slideInMain = (Storyboard)this.Resources["SlideMainInFromRight"];
+
+
+            slideOutTools.Begin();
+            slideInMain.Begin();
         }
 
         private static void ScrollListBox(ListBox listBox, bool scrollUp)
@@ -154,19 +176,23 @@ namespace CsharpMiniProjects.HomePage
                 case "SnakeGame":
                     NavigationService.Navigate(new SnakeGamePage());
                     break;
-                case "Tetris":
-                    NavigationService.Navigate(new SnakeGamePage());
+                case "PongGame":
+                    NavigationService.Navigate(new PongGameHomePage());
                     break;
                 case "WorkHoursManagement":
                     NavigationService.Navigate(new WorkHoursHomePage());
                     break;
                 case "ToDoList":
-                    NavigationService.Navigate(new CsharpMiniProjects.MiniProjects.Tools.ToDoList.ToDoListHomePage());
+                    NavigationService.Navigate(new MiniProjects.Tools.ToDoList.ToDoListHomePage());
+                    break;
+                case "Countries":
+                    NavigationService.Navigate(new CountriesHomePage());
                     break;
                 case "ExplicitWordMonitor":
                     var mainWindow = new ExplicitWordMonitor.MainWindow();
                     mainWindow.Show();
                     break;
+
                 default:
                     MessageBox.Show("No page associated with this item.");
                     break;
@@ -202,17 +228,18 @@ namespace CsharpMiniProjects.HomePage
 
                 popupIconImage.Source = new BitmapImage(new Uri(itemData.IconSource, UriKind.RelativeOrAbsolute));
 
-                if (GamesSection.Visibility == Visibility.Visible)
+                if (activeSection == "Games")
                 {
                     popupInfo.PlacementTarget = TitlesInGamesSection;
                     popupInfo.Placement = System.Windows.Controls.Primitives.PlacementMode.Left;
                     popupInfo.HorizontalOffset = -240;
                 }
-                else if (ToolsSection.Visibility == Visibility.Visible)
+                else if (activeSection == "Tools")
                 {
                     popupInfo.PlacementTarget = TitlesInToolsSection;
                     popupInfo.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
                     popupInfo.HorizontalOffset = 250;
+                    popupInfo.VerticalOffset = -75;
                 }
                 popupInfo.IsOpen = true;
             }
