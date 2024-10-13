@@ -88,7 +88,14 @@ namespace CsharpMiniProjects.MiniProjects.Tools.Countries
         }
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new HomePage.HomePage());
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                NavigationService.Navigate(new HomePage.HomePage());
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages
 
         public ObservableCollection<DailyWorkHours> DailyWorkHoursItems { get; set; }
         private List<DateTime> allBlackoutDates;
-        private WorkYear CurrentWorkYear { get; set; }
+        private WorkYear CurrentWorkYear { get; set; } 
         private string dontShowFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DontShowAgainWorkHourManagement.txt");
 
         public WorkHoursHomePage()
@@ -47,6 +47,21 @@ namespace CsharpMiniProjects.Tools.WorkHoursManagementApp.Pages
             currentUser.AddWorkYear(new DateTime(2021, 11, 1), new DateTime(2022, 9, 30), "Yeshivat Noam 2021-2022",31.9m);
             }
 
+            // Set the default WorkYear
+            CurrentWorkYear = currentUser.WorkYearsList
+                .FirstOrDefault(wy => wy.WorkYearName == "Yeshivat Noam 2023-2024");
+
+            // If found, apply it as the current WorkYear
+            if (CurrentWorkYear != null)
+            {
+                ApplyCurrentWorkYear(CurrentWorkYear);
+                SummaryPopupControl.UpdatehourlyRate(CurrentWorkYear.HourlyRate);
+            }
+            else
+            {
+                // If not found, you might want to handle this case
+                System.Windows.MessageBox.Show("Default WorkYear 'Yeshivat Noam 2023-2024' not found.");
+            }
             //Methods passed on from the ChooseWorkYear Control for choosing and adding WorkYears
             ChooseWorkYearControl.LoadWorkYears(currentUser.WorkYearsList);
             ChooseWorkYearControl.WorkYearChanged += ChooseWorkYear_WorkYearChanged;
